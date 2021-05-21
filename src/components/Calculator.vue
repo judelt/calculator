@@ -1,4 +1,15 @@
 <template>
+<div class ="background" :class="{ 'darkMode': darkMode }">
+  <input
+    type="checkbox"
+    class="checkbox"
+    id="chk"
+    @click="toggle"
+  />
+	<label class="label" for="chk">
+		<div class="ball"></div>
+	</label>
+
   <div class="calculator">
     <div class="display">
       <div
@@ -27,6 +38,7 @@
     <button @click="dot">.</button>
     <button class="operator" @click="equal">=</button>
   </div>
+  </div>
 </template>
 
 <script>
@@ -39,7 +51,8 @@ export default {
       current: '',
       operator: null,
       operators: [],
-      operatorClicked: false
+      operatorClicked: false,
+      darkMode: false,
     }
   },
   computed: {
@@ -125,12 +138,31 @@ export default {
       
       console.log('operators', this.operators.length)
     },
+    toggle() {
+      this.darkMode ? this.darkMode = false : this.darkMode = true;
+    }
   }
 }
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+.background {
+  min-height: 100%;
+  background-color: cornsilk;
+  transition: 0.3s ease-in-out;
+  margin: 0;
+}
+
+.darkMode {
+  background-color: black;
+}
 .calculator {
+  background-color: black;
+  text-align: center;
+  width: 20%;
+  margin: 5% auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: minmax(50px, auto);
@@ -170,5 +202,39 @@ button {
 .operator2 {
   background-color: #f6f5f5;
 }
+/* toggle */
+.checkbox {
+	opacity: 0;
+	position: absolute;
+}
+.label {
+	background-color: #111;
+	border-radius: 50px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 5px;
+	position: relative;
+	height: 26px;
+	width: 50px;
+	transform: scale(1.5);
+}
+
+.label .ball {
+	background-color: #fff;
+	border-radius: 50%;
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	height: 22px;
+	width: 22px;
+	transform: translateX(0px);
+	transition: transform 0.2s linear;
+}
+.checkbox:checked + .label .ball {
+	transform: translateX(24px);
+}
+
 
 </style>
