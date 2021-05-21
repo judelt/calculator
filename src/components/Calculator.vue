@@ -60,7 +60,7 @@ export default {
     },
     sign() {
       if (this.current !== '') {
-        this.current = this.current.charAt(0) === '-' ? this.current.slice(1) : `- ${this.current}`;
+        this.current = this.current.charAt(0) === '-' ? this.current.slice(1) : `-${this.current}`;
         console.log('current', this.current)
       } 
     },
