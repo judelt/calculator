@@ -65,6 +65,7 @@ export default {
       } 
     },
     percent() {
+      if(this.current !== null)
       this.current = `${parseFloat(this.current) / 100}`
     },
     append(number) {
@@ -82,8 +83,6 @@ export default {
       } else {
         this.current = `${this.current}${number}`;
       }
-      console.log('number', number)
-      console.log('current', this.current)
     },
     dot() {
       if(this.current.indexOf('.') === -1) this.append('.');
@@ -116,7 +115,17 @@ export default {
         )}`
       }
       this.previous = null;
-    },      
+    },
+    automaticEqual() {
+     if(this.previous) {
+        this.current = `${this.operator(
+        parseFloat(this.previous),
+        parseFloat(this.current)
+        )}`
+        this.previous = this.current;
+      }
+      
+    },   
   }
 }
 </script>
