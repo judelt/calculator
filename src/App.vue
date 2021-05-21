@@ -16,11 +16,14 @@ export default {
 </script>
 
 <style>
+
+html, body {
+  margin:0;
+  padding:0;
+}
 #app {
+  height: 100vh;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
-  text-align: center;
-  width: 20%;
-  margin: 5% auto;
 }
 </style>
