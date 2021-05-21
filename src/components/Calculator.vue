@@ -47,7 +47,6 @@ export default {
         return 250 - (this.current.length ** 1.57)
       }
       if (this.current.length >= 20) {
-        console.log('this.current.length', this.current.length)
         return 250 - (this.current.length * 5.5)       
       } 
       return 250;
@@ -61,7 +60,6 @@ export default {
     sign() {
       if (this.current !== '') {
         this.current = this.current.charAt(0) === '-' ? this.current.slice(1) : `-${this.current}`;
-        console.log('current', this.current)
       } 
     },
     percent() {
@@ -69,7 +67,6 @@ export default {
       this.current = `${parseFloat(this.current) / 100}`
     },
     append(number) {
-      
       if (this.operatorClicked) {
         this.current = '';
         this.operatorClicked = false;
@@ -92,19 +89,19 @@ export default {
       this.operatorClicked = true;
     },
     divide() {
-      this.operator = (a, b) => Math.round(a / b * 10000) /10000;
-      this.setPrevious()
+      this.operator = (a, b) => Math.round((a / b) * 10000) / 10000;
+      this.setPrevious();
     },
     times() {
-      this.operator = (a, b) => Math.round(a * b * 10000) /10000;
+      this.operator = (a, b) => Math.round((a * b) * 10000) / 10000;
       this.setPrevious()
     }, 
     minus() {
-      this.operator = (a, b) => Math.round(a - b * 10000) /10000;
+      this.operator = (a, b) => Math.round((a - b) * 10000) / 10000;
       this.setPrevious()
     },
     plus() {
-      this.operator = (a, b) => Math.round(a + b * 10000) /10000;
+      this.operator = (a, b) => Math.round((a + b) * 10000) / 10000;
       this.setPrevious()
     },
     equal() {
@@ -116,21 +113,10 @@ export default {
       }
       this.previous = null;
     },
-    automaticEqual() {
-     if(this.previous) {
-        this.current = `${this.operator(
-        parseFloat(this.previous),
-        parseFloat(this.current)
-        )}`
-        this.previous = this.current;
-      }
-      
-    },   
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .calculator {
   display: grid;
@@ -142,16 +128,15 @@ export default {
   grid-column: 1 / 5;
   grid-row: 1 / 3;
   
-background:
-radial-gradient(#1a4652 1%, transparent 5%) 0 0,
-radial-gradient(#1a4652 1%, transparent 5%) 8px 8px,
-radial-gradient(rgba(246, 245, 245,.1) 15%, transparent 20%) 0 1px,
-radial-gradient(rgba(246, 245, 245,.1) 15%, transparent 20%) 8px 9px;
-background-color:#276678;
-background-size:16px 16px;
-color: #d3e0ea; 
+  background:
+  radial-gradient(#1a4652 1%, transparent 5%) 0 0,
+  radial-gradient(#1a4652 1%, transparent 5%) 8px 8px,
+  radial-gradient(rgba(246, 245, 245,.1) 15%, transparent 20%) 0 1px,
+  radial-gradient(rgba(246, 245, 245,.1) 15%, transparent 20%) 8px 9px;
+  background-color:#276678;
+  background-size:16px 16px;
+  color: #d3e0ea; 
 }
-
 .current {
   align-self: center;
   justify-self:right;
@@ -159,7 +144,6 @@ color: #d3e0ea;
   font-size: 3em;
   overflow: hidden;
 }
-
 .zero {
   grid-column: 1 / 3;
 }
@@ -168,7 +152,6 @@ button {
   background-color: #d3e0ea;
   border: 1px solid rgba(246, 245, 245, 0.5);
 }
-
 .operator {
   background-color: #1687a7;
 }
