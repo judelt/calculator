@@ -20,7 +20,7 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-align: center;
-  width: 30%;
+  width: 20%;
   margin: 5% auto;
 }
 </style>

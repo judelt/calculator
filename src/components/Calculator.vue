@@ -59,27 +59,29 @@ export default {
       this.operatorClicked = true;
     },
     divide() {
-      this.operator = (a, b) => a / b;
+      this.operator = (a, b) => Math.round(a / b * 10000) /10000;
       this.setPrevious()
     },
     times() {
-      this.operator = (a, b) => a * b;
+      this.operator = (a, b) => Math.round(a * b * 10000) /10000;
       this.setPrevious()
-    },
+    }, 
     minus() {
-      this.operator = (a, b) => a - b;
+      this.operator = (a, b) => Math.round(a - b * 10000) /10000;
       this.setPrevious()
     },
     plus() {
-      this.operator = (a, b) => a + b;
+      this.operator = (a, b) => Math.round(a + b * 10000) /10000;
       this.setPrevious()
     },
     equal() {
-      this.current = `${this.operator(
+      if(this.previous) {
+        this.current = `${this.operator(
         parseFloat(this.previous),
         parseFloat(this.current)
-        
-      )}`;
+        )}`
+      }
+      
       this.previous = null;
     },      
   }
