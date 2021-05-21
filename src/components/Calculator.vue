@@ -11,15 +11,15 @@
 	</label>
 
   <div class="calculator">
-    <div class="display">
+    <div class="display" :class="{ 'darkMode': darkMode }">
       <div
       class="current"
       :style="'font-size:'+fontSize+'%'">
         {{current || '0'}}
       </div>
     </div>
-    <button class="operator2" @click="clear">C</button>
-    <button class="operator2" @click="sign">+/-</button>
+    <button class="operator2" :class="{ 'darkMode': darkMode }" @click="clear">C</button>
+    <button class="operator2" :class="{ 'darkMode': darkMode }" @click="sign">+/-</button>
     <button class="operator2" @click="percent">%</button>
     <button class="operator" @click="divide">÷</button>
     <button @click="append('7')">7</button>
@@ -157,6 +157,7 @@ export default {
 
 .darkMode {
   background-color: #393e46;
+  color: #393e46 !important;
 }
 .calculator {
   text-align: center;
@@ -181,6 +182,7 @@ export default {
   background-size:16px 16px;
   color: #d3e0ea; 
 }
+
 .current {
   align-self: center;
   justify-self:right;
