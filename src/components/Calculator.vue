@@ -150,22 +150,22 @@ export default {
 
 .background {
   min-height: 100%;
-  background-color: cornsilk;
+  background-color: #eeeeee;
   transition: 0.3s ease-in-out;
   margin: 0;
 }
 
 .darkMode {
-  background-color: black;
+  background-color: #393e46;
 }
 .calculator {
-  background-color: black;
   text-align: center;
   width: 20%;
   margin: 5% auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: minmax(50px, auto);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .display {
   display: grid;
@@ -195,6 +195,7 @@ button {
   font-size: 0.8em;
   background-color: #d3e0ea;
   border: 1px solid rgba(246, 245, 245, 0.5);
+  
 }
 .operator {
   background-color: #1687a7;
@@ -205,30 +206,33 @@ button {
 /* toggle */
 .checkbox {
 	opacity: 0;
-	position: absolute;
+	/* position: absolute; */
 }
 .label {
-	background-color: #111;
+	background-color: #1687a7;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 	border-radius: 50px;
+  margin-left: 5%;
 	cursor: pointer;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	padding: 5px;
 	position: relative;
-	height: 26px;
-	width: 50px;
+	height: 1vw;
+	width: 3vw;
 	transform: scale(1.5);
 }
 
 .label .ball {
-	background-color: #fff;
+	background-color: #f6f5f5;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 	border-radius: 50%;
-	position: absolute;
+	/* position: absolute; */
 	top: 2px;
 	left: 2px;
-	height: 22px;
-	width: 22px;
+	height: 1vw;
+	width: 1vw;
 	transform: translateX(0px);
 	transition: transform 0.2s linear;
 }
