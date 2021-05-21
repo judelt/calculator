@@ -38,6 +38,7 @@ export default {
       currentString: '',
       current: '',
       operator: null,
+      operators: [],
       operatorClicked: false
     }
   },
@@ -56,6 +57,7 @@ export default {
     clear() {
       this.current = '';
       this.previous = null;
+      this.operators = [];
     },
     sign() {
       if (this.current !== '') {
@@ -71,14 +73,17 @@ export default {
         this.current = '';
         this.operatorClicked = false;
       }
-      //max lenght 25
-      if (this.current.length >= 25) {
-        return this.current;
-      } 
-      if (this.current === '' || this.current === '0') {
-        this.current = number;
-      } else {
-        this.current = `${this.current}${number}`;
+      //preventing to append if number is result of operation
+      if (this.operators.length === 0) {
+        //max lenght 25
+        if (this.current.length >= 25) {
+          return this.current;
+        } 
+        if (this.current === '' || this.current === '0') {
+          this.current = number;
+        } else {
+          this.current = `${this.current}${number}`;
+        }
       }
     },
     dot() {
@@ -89,29 +94,36 @@ export default {
       this.operatorClicked = true;
     },
     divide() {
+      this.operators = [];
       this.operator = (a, b) => Math.round((a / b) * 10000) / 10000;
       this.setPrevious();
     },
     times() {
+      this.operators = [];
       this.operator = (a, b) => Math.round((a * b) * 10000) / 10000;
       this.setPrevious()
     }, 
     minus() {
+      this.operators = [];
       this.operator = (a, b) => Math.round((a - b) * 10000) / 10000;
       this.setPrevious()
     },
     plus() {
+      this.operators = [];
       this.operator = (a, b) => Math.round((a + b) * 10000) / 10000;
       this.setPrevious()
     },
     equal() {
       if(this.previous) {
+        this.operators.push(this.operator)
         this.current = `${this.operator(
         parseFloat(this.previous),
         parseFloat(this.current)
         )}`
       }
       this.previous = null;
+      
+      console.log('operators', this.operators.length)
     },
   }
 }
