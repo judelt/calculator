@@ -1,44 +1,47 @@
 <template>
 <div class ="background" :class="{ 'darkMode': darkMode }">
-  <input
-    type="checkbox"
-    class="checkbox"
-    id="chk"
-    @click="toggle"
-  />
-	<label class="label" for="chk">
-		<div class="ball" :class="{ 'darkMode': darkMode }"></div>
-	</label>
-
-  <div class="calculator">
-    <div class="display" :class="{ 'darkMode': darkMode }">
-      <div
-      class="current"
-      :style="'font-size:'+fontSize+'%'">
-        {{current || '0'}}
+  <div>
+    <input
+      type="checkbox"
+      class="checkbox"
+      id="chk"
+      @click="toggle"
+    />
+    <label class="label" for="chk">
+      <div class="ball" :class="{ 'darkMode': darkMode }"></div>
+    </label>
+  </div>
+  <div class="calculator-container">
+    <div class="calculator">
+      <div class="display" :class="{ 'darkMode': darkMode }">
+        <div
+        class="current"
+        :style="'font-size:'+fontSize+'%'">
+          {{current || '0'}}
+        </div>
       </div>
+      <button class="operator2" :class="{ 'darkMode': darkMode }" @click="clear">C</button>
+      <button class="operator2" :class="{ 'darkMode': darkMode }" @click="sign">+/-</button>
+      <button class="operator2" :class="{ 'darkMode': darkMode }" @click="percent">%</button>
+      <button class="operator" :class="{ 'darkMode': darkMode }" @click="divide">÷</button>
+      <button :class="{ 'darkMode': darkMode }" @click="append('7')">7</button>
+      <button :class="{ 'darkMode': darkMode }" @click="append('8')">8</button>
+      <button :class="{ 'darkMode': darkMode }" @click="append('9')">9</button>
+      <button class="operator" :class="{ 'darkMode': darkMode }" @click="times">x</button>
+      <button :class="{ 'darkMode': darkMode }" @click="append('4')">4</button>
+      <button :class="{ 'darkMode': darkMode }" @click="append('5')">5</button>
+      <button :class="{ 'darkMode': darkMode }" @click="append('6')">6</button>
+      <button class="operator" :class="{ 'darkMode': darkMode }" @click="minus">-</button>
+      <button :class="{ 'darkMode': darkMode }" @click="append('1')">1</button>
+      <button :class="{ 'darkMode': darkMode }" @click="append('2')">2</button>
+      <button :class="{ 'darkMode': darkMode }" @click="append('3')">3</button>
+      <button class="operator" :class="{ 'darkMode': darkMode }" @click="plus">+</button>
+      <button :class="{ 'darkMode': darkMode }" class="zero" @click="append('0')">0</button>
+      <button :class="{ 'darkMode': darkMode }" @click="dot">.</button>
+      <button class="operator" :class="{ 'darkMode': darkMode }" @click="equal">=</button>
     </div>
-    <button class="operator2" :class="{ 'darkMode': darkMode }" @click="clear">C</button>
-    <button class="operator2" :class="{ 'darkMode': darkMode }" @click="sign">+/-</button>
-    <button class="operator2" :class="{ 'darkMode': darkMode }" @click="percent">%</button>
-    <button class="operator" :class="{ 'darkMode': darkMode }" @click="divide">÷</button>
-    <button :class="{ 'darkMode': darkMode }" @click="append('7')">7</button>
-    <button :class="{ 'darkMode': darkMode }" @click="append('8')">8</button>
-    <button :class="{ 'darkMode': darkMode }" @click="append('9')">9</button>
-    <button class="operator" :class="{ 'darkMode': darkMode }" @click="times">x</button>
-    <button :class="{ 'darkMode': darkMode }" @click="append('4')">4</button>
-    <button :class="{ 'darkMode': darkMode }" @click="append('5')">5</button>
-    <button :class="{ 'darkMode': darkMode }" @click="append('6')">6</button>
-    <button class="operator" :class="{ 'darkMode': darkMode }" @click="minus">-</button>
-    <button :class="{ 'darkMode': darkMode }" @click="append('1')">1</button>
-    <button :class="{ 'darkMode': darkMode }" @click="append('2')">2</button>
-    <button :class="{ 'darkMode': darkMode }" @click="append('3')">3</button>
-    <button class="operator" :class="{ 'darkMode': darkMode }" @click="plus">+</button>
-    <button :class="{ 'darkMode': darkMode }" class="zero" @click="append('0')">0</button>
-    <button :class="{ 'darkMode': darkMode }" @click="dot">.</button>
-    <button class="operator" :class="{ 'darkMode': darkMode }" @click="equal">=</button>
   </div>
-  </div>
+</div>
 </template>
 
 <script>
@@ -148,23 +151,27 @@ export default {
 <style scoped>
 @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 
+/* Mobile Styles */
 .background {
   min-height: 100%;
   background-color: #eeeeee;
   transition: 0.3s ease-in-out;
-  margin: 0;
 }
 .darkMode {
   background-color: #090C10;
   color: #222831!important;
 }
+.calculator-container {
+  margin-top: 15%;
+}
 .calculator {
   text-align: center;
-  width: 20%;
   margin: 5% auto;
   display: grid;
+  width: 48vh;
+  padding: 0;
   grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: minmax(50px, auto);
+  grid-auto-rows: minmax(7vh, 9vh);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .display {
@@ -193,7 +200,7 @@ export default {
   grid-column: 1 / 3;
 }
 button {
-  font-size: 0.8em;
+  font-size: 0.9em;
   background-color: #d3e0ea;
   border: 1px solid rgba(246, 245, 245, 0.5);
   transition: 0.3s ease-in-out;
@@ -222,39 +229,72 @@ button.darkMode{
 /* toggle */
 .checkbox {
 	opacity: 0;
-	/* position: absolute; */
 }
 .label {
-	background-color: #1687a7;
+	background-color: #276678;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 	border-radius: 50px;
   margin-left: 5%;
+  margin-top: 4%;
 	cursor: pointer;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	padding: 5px;
 	position: relative;
-	height: 1vw;
-	width: 3vw;
+	height: 4vw;
+	width: 7vw;
 	transform: scale(1.5);
 }
 .label .ball {
 	background-color: #f6f5f5;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 	border-radius: 50%;
-	top: 2px;
-	left: 2px;
-	height: 1vw;
-	width: 1vw;
+	height: 3vw;
+	width: 3vw;
 	transform: translateX(0px);
   transition: 0.3s ease-in-out;
 }
 .checkbox:checked + .label .ball {
-	transform: translateX(24px);
+	transform: translateX(150%);
 }
 .ball.darkMode {
   background-color: #d3e0ea;
+}
+/* Tablet Styles */
+@media only screen and (min-width: 768px) {
+  .label {
+    height: 2vw;
+    width: 5vw;
+  }
+  .label .ball {
+    height: 2vw;
+    width: 2vw;
+  }
+}
+
+/* Desktop styles */
+@media only screen and (min-width: 1080px) {
+
+  .calculator {
+    width: 40vh;
+    grid-auto-rows: minmax(7vh, 8vh);
+  }
+  .calculator-container {
+    margin-top: 0%;
+  }
+  .label {
+    margin-top: 0;
+    height: 1vw;
+    width: 3vw;
+  }
+  .label .ball {
+    height: 1vw;
+    width: 1vw;
+  }
+  .checkbox:checked + .label .ball {
+    transform: translateX(200%);
+  }
 }
 
 </style>
