@@ -1,92 +1,120 @@
 <template>
-<div class ="background" :class="{ 'darkMode': darkMode }">
-  <div>
-    <input
-      type="checkbox"
-      class="checkbox"
-      id="chk"
-      @click="toggle"
-    />
-    <label class="label" for="chk">
-      <div class="ball" :class="{ 'darkMode': darkMode }"></div>
-    </label>
-  </div>
-  <div class="calculator-container">
-    <div class="calculator">
-      <div class="display" :class="{ 'darkMode': darkMode }">
-        <div
-        class="current"
-        :style="'font-size:'+fontSize+'%'">
-          {{current || '0'}}
+  <div class="background" :class="{ darkMode: darkMode }">
+    <div>
+      <input type="checkbox" class="checkbox" id="chk" @click="toggle" />
+      <label class="label" for="chk">
+        <div class="ball" :class="{ darkMode: darkMode }"></div>
+      </label>
+    </div>
+    <div class="calculator-container">
+      <div class="calculator">
+        <div class="display" :class="{ darkMode: darkMode }">
+          <div class="current" :style="'font-size:' + fontSize + '%'">
+            {{ current || "0" }}
+          </div>
         </div>
+        <button
+          class="operator2"
+          :class="{ darkMode: darkMode }"
+          @click="clear"
+        >
+          C
+        </button>
+        <button class="operator2" :class="{ darkMode: darkMode }" @click="sign">
+          +/-
+        </button>
+        <button
+          class="operator2"
+          :class="{ darkMode: darkMode }"
+          @click="percent"
+        >
+          %
+        </button>
+        <button
+          class="operator"
+          :class="{ darkMode: darkMode }"
+          @click="divide"
+        >
+          ÷
+        </button>
+        <button :class="{ darkMode: darkMode }" @click="append('7')">7</button>
+        <button :class="{ darkMode: darkMode }" @click="append('8')">8</button>
+        <button :class="{ darkMode: darkMode }" @click="append('9')">9</button>
+        <button class="operator" :class="{ darkMode: darkMode }" @click="times">
+          x
+        </button>
+        <button :class="{ darkMode: darkMode }" @click="append('4')">4</button>
+        <button :class="{ darkMode: darkMode }" @click="append('5')">5</button>
+        <button :class="{ darkMode: darkMode }" @click="append('6')">6</button>
+        <button class="operator" :class="{ darkMode: darkMode }" @click="minus">
+          -
+        </button>
+        <button :class="{ darkMode: darkMode }" @click="append('1')">1</button>
+        <button :class="{ darkMode: darkMode }" @click="append('2')">2</button>
+        <button :class="{ darkMode: darkMode }" @click="append('3')">3</button>
+        <button class="operator" :class="{ darkMode: darkMode }" @click="plus">
+          +
+        </button>
+        <button
+          :class="{ darkMode: darkMode }"
+          class="zero"
+          @click="append('0')"
+        >
+          0
+        </button>
+        <button :class="{ darkMode: darkMode }" @click="dot">.</button>
+        <button class="operator" :class="{ darkMode: darkMode }" @click="equal">
+          =
+        </button>
       </div>
-      <button class="operator2" :class="{ 'darkMode': darkMode }" @click="clear">C</button>
-      <button class="operator2" :class="{ 'darkMode': darkMode }" @click="sign">+/-</button>
-      <button class="operator2" :class="{ 'darkMode': darkMode }" @click="percent">%</button>
-      <button class="operator" :class="{ 'darkMode': darkMode }" @click="divide">÷</button>
-      <button :class="{ 'darkMode': darkMode }" @click="append('7')">7</button>
-      <button :class="{ 'darkMode': darkMode }" @click="append('8')">8</button>
-      <button :class="{ 'darkMode': darkMode }" @click="append('9')">9</button>
-      <button class="operator" :class="{ 'darkMode': darkMode }" @click="times">x</button>
-      <button :class="{ 'darkMode': darkMode }" @click="append('4')">4</button>
-      <button :class="{ 'darkMode': darkMode }" @click="append('5')">5</button>
-      <button :class="{ 'darkMode': darkMode }" @click="append('6')">6</button>
-      <button class="operator" :class="{ 'darkMode': darkMode }" @click="minus">-</button>
-      <button :class="{ 'darkMode': darkMode }" @click="append('1')">1</button>
-      <button :class="{ 'darkMode': darkMode }" @click="append('2')">2</button>
-      <button :class="{ 'darkMode': darkMode }" @click="append('3')">3</button>
-      <button class="operator" :class="{ 'darkMode': darkMode }" @click="plus">+</button>
-      <button :class="{ 'darkMode': darkMode }" class="zero" @click="append('0')">0</button>
-      <button :class="{ 'darkMode': darkMode }" @click="dot">.</button>
-      <button class="operator" :class="{ 'darkMode': darkMode }" @click="equal">=</button>
     </div>
   </div>
-</div>
 </template>
 
 <script>
-
 export default {
- 
   data() {
     return {
-      currentString: '',
-      current: '',
+      currentString: "",
+      current: "",
       operator: null,
       operators: [],
       operatorClicked: false,
       darkMode: false,
-    }
+    };
   },
   computed: {
-     fontSize() {
+    fontSize() {
       if (this.current.length >= 10 && this.current.length < 20) {
-        return 250 - (this.current.length ** 1.57)
+        return 250 - this.current.length ** 1.57;
       }
       if (this.current.length >= 20) {
-        return 250 - (this.current.length * 5.5)       
-      } 
+        return 250 - this.current.length * 5.5;
+      }
       return 250;
-    }
+    },
   },
   methods: {
     clear() {
-      this.current = '';
+      this.current = "";
       this.previous = null;
       this.operators = [];
     },
     sign() {
-      if (this.current !== '') {
-        this.current = this.current.charAt(0) === '-' ? this.current.slice(1) : `-${this.current}`;
-      } 
+      if (this.current !== "") {
+        this.current =
+          this.current.charAt(0) === "-"
+            ? this.current.slice(1)
+            : `-${this.current}`;
+      }
     },
     percent() {
-      if(this.current !== null)
-      this.current = `${parseFloat(this.current) / 100}`
+      if (this.current !== null)
+        this.current = `${parseFloat(this.current) / 100}`;
     },
     append(number) {
       if (this.operatorClicked) {
-        this.current = '';
+        this.current = "";
         this.operatorClicked = false;
       }
       //preventing to append if number is result of operation
@@ -94,8 +122,8 @@ export default {
         //max lenght 25
         if (this.current.length >= 25) {
           return this.current;
-        } 
-        if (this.current === '' || this.current === '0') {
+        }
+        if (this.current === "" || this.current === "0") {
           this.current = number;
         } else {
           this.current = `${this.current}${number}`;
@@ -103,9 +131,9 @@ export default {
       }
     },
     dot() {
-      if(this.current.indexOf('.') === -1) this.append('.');
+      if (this.current.indexOf(".") === -1) this.append(".");
     },
-    setPrevious(){
+    setPrevious() {
       this.previous = this.current;
       this.operatorClicked = true;
     },
@@ -116,40 +144,39 @@ export default {
     },
     times() {
       this.operators = [];
-      this.operator = (a, b) => Math.round((a * b) * 10000) / 10000;
-      this.setPrevious()
-    }, 
+      this.operator = (a, b) => Math.round(a * b * 10000) / 10000;
+      this.setPrevious();
+    },
     minus() {
       this.operators = [];
       this.operator = (a, b) => Math.round((a - b) * 10000) / 10000;
-      this.setPrevious()
+      this.setPrevious();
     },
     plus() {
       this.operators = [];
       this.operator = (a, b) => Math.round((a + b) * 10000) / 10000;
-      this.setPrevious()
+      this.setPrevious();
     },
     equal() {
-      if(this.previous) {
-        this.operators.push(this.operator)
+      if (this.previous) {
+        this.operators.push(this.operator);
         this.current = `${this.operator(
-        parseFloat(this.previous),
-        parseFloat(this.current)
-        )}`
+          parseFloat(this.previous),
+          parseFloat(this.current)
+        )}`;
       }
       this.previous = null;
-      
-      console.log('operators', this.operators.length)
+
+      console.log("operators", this.operators.length);
     },
     toggle() {
-      this.darkMode ? this.darkMode = false : this.darkMode = true;
-    }
-  }
-}
+      this.darkMode ? (this.darkMode = false) : (this.darkMode = true);
+    },
+  },
+};
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 
 /* Mobile Styles */
 .background {
@@ -158,8 +185,8 @@ export default {
   transition: 0.3s ease-in-out;
 }
 .darkMode {
-  background-color: #090C10;
-  color: #222831!important;
+  background-color: #090c10;
+  color: #222831 !important;
 }
 .calculator-container {
   margin-top: 15%;
@@ -178,20 +205,19 @@ export default {
   display: grid;
   grid-column: 1 / 5;
   grid-row: 1 / 3;
-  
-  background:
-  radial-gradient(#1a4652 1%, transparent 5%) 0 0,
-  radial-gradient(#1a4652 1%, transparent 5%) 8px 8px,
-  radial-gradient(rgba(246, 245, 245,.1) 15%, transparent 20%) 0 1px,
-  radial-gradient(rgba(246, 245, 245,.1) 15%, transparent 20%) 8px 9px;
-  background-color:#276678;
-  background-size:16px 16px;
+
+  background: radial-gradient(#1a4652 1%, transparent 5%) 0 0,
+    radial-gradient(#1a4652 1%, transparent 5%) 8px 8px,
+    radial-gradient(rgba(246, 245, 245, 0.1) 15%, transparent 20%) 0 1px,
+    radial-gradient(rgba(246, 245, 245, 0.1) 15%, transparent 20%) 8px 9px;
+  background-color: #276678;
+  background-size: 16px 16px;
   color: #d3e0ea;
   transition: 0.3s ease-in-out;
 }
 .current {
   align-self: center;
-  justify-self:right;
+  justify-self: right;
   padding-right: 8%;
   font-size: 3em;
   overflow: hidden;
@@ -205,7 +231,7 @@ button {
   border: 1px solid rgba(246, 245, 245, 0.5);
   transition: 0.3s ease-in-out;
 }
-button.darkMode{
+button.darkMode {
   background-color: #393e46;
   color: #d3e0ea !important;
   border: 1px solid #222831 !important;
@@ -224,39 +250,39 @@ button.darkMode{
 }
 .operator2.darkMode {
   background-color: #222831;
-  color: #d3e0ea!important;  
+  color: #d3e0ea !important;
 }
 /* toggle */
 .checkbox {
-	opacity: 0;
+  opacity: 0;
 }
 .label {
-	background-color: #276678;
+  background-color: #276678;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-	border-radius: 50px;
+  border-radius: 50px;
   margin-left: 5%;
   margin-top: 4%;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 5px;
-	position: relative;
-	height: 4vw;
-	width: 7vw;
-	transform: scale(1.5);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  position: relative;
+  height: 4vw;
+  width: 7vw;
+  transform: scale(1.5);
 }
 .label .ball {
-	background-color: #f6f5f5;
+  background-color: #f6f5f5;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-	border-radius: 50%;
-	height: 3vw;
-	width: 3vw;
-	transform: translateX(0px);
+  border-radius: 50%;
+  height: 3vw;
+  width: 3vw;
+  transform: translateX(0px);
   transition: 0.3s ease-in-out;
 }
 .checkbox:checked + .label .ball {
-	transform: translateX(150%);
+  transform: translateX(150%);
 }
 .ball.darkMode {
   background-color: #d3e0ea;
@@ -275,7 +301,6 @@ button.darkMode{
 
 /* Desktop styles */
 @media only screen and (min-width: 1080px) {
-
   .calculator {
     width: 40vh;
     grid-auto-rows: minmax(7vh, 8vh);
@@ -296,5 +321,4 @@ button.darkMode{
     transform: translateX(200%);
   }
 }
-
 </style>

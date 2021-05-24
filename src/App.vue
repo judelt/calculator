@@ -1,25 +1,25 @@
 <template>
   <div id="app">
-    <Calculator/>
+    <Calculator />
   </div>
 </template>
 
 <script>
-import Calculator from './components/Calculator.vue'
+import Calculator from "./components/Calculator.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    Calculator
-  }
-}
+    Calculator,
+  },
+};
 </script>
 
 <style>
-
-html, body {
-  margin:0;
-  padding:0;
+html,
+body {
+  margin: 0;
+  padding: 0;
 }
 #app {
   height: 100vh;
