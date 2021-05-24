@@ -7,7 +7,7 @@
     @click="toggle"
   />
 	<label class="label" for="chk">
-		<div class="ball"></div>
+		<div class="ball" :class="{ 'darkMode': darkMode }"></div>
 	</label>
 
   <div class="calculator">
@@ -20,23 +20,23 @@
     </div>
     <button class="operator2" :class="{ 'darkMode': darkMode }" @click="clear">C</button>
     <button class="operator2" :class="{ 'darkMode': darkMode }" @click="sign">+/-</button>
-    <button class="operator2" @click="percent">%</button>
-    <button class="operator" @click="divide">÷</button>
-    <button @click="append('7')">7</button>
-    <button @click="append('8')">8</button>
-    <button @click="append('9')">9</button>
-    <button class="operator" @click="times">x</button>
-    <button @click="append('4')">4</button>
-    <button @click="append('5')">5</button>
-    <button @click="append('6')">6</button>
-    <button class="operator" @click="minus">-</button>
-    <button @click="append('1')">1</button>
-    <button @click="append('2')">2</button>
-    <button @click="append('3')">3</button>
-    <button class="operator" @click="plus">+</button>
-    <button class="zero" @click="append('0')">0</button>
-    <button @click="dot">.</button>
-    <button class="operator" @click="equal">=</button>
+    <button class="operator2" :class="{ 'darkMode': darkMode }" @click="percent">%</button>
+    <button class="operator" :class="{ 'darkMode': darkMode }" @click="divide">÷</button>
+    <button :class="{ 'darkMode': darkMode }" @click="append('7')">7</button>
+    <button :class="{ 'darkMode': darkMode }" @click="append('8')">8</button>
+    <button :class="{ 'darkMode': darkMode }" @click="append('9')">9</button>
+    <button class="operator" :class="{ 'darkMode': darkMode }" @click="times">x</button>
+    <button :class="{ 'darkMode': darkMode }" @click="append('4')">4</button>
+    <button :class="{ 'darkMode': darkMode }" @click="append('5')">5</button>
+    <button :class="{ 'darkMode': darkMode }" @click="append('6')">6</button>
+    <button class="operator" :class="{ 'darkMode': darkMode }" @click="minus">-</button>
+    <button :class="{ 'darkMode': darkMode }" @click="append('1')">1</button>
+    <button :class="{ 'darkMode': darkMode }" @click="append('2')">2</button>
+    <button :class="{ 'darkMode': darkMode }" @click="append('3')">3</button>
+    <button class="operator" :class="{ 'darkMode': darkMode }" @click="plus">+</button>
+    <button :class="{ 'darkMode': darkMode }" class="zero" @click="append('0')">0</button>
+    <button :class="{ 'darkMode': darkMode }" @click="dot">.</button>
+    <button class="operator" :class="{ 'darkMode': darkMode }" @click="equal">=</button>
   </div>
   </div>
 </template>
@@ -154,10 +154,9 @@ export default {
   transition: 0.3s ease-in-out;
   margin: 0;
 }
-
 .darkMode {
-  background-color: #393e46;
-  color: #393e46 !important;
+  background-color: #090C10;
+  color: #222831!important;
 }
 .calculator {
   text-align: center;
@@ -180,9 +179,9 @@ export default {
   radial-gradient(rgba(246, 245, 245,.1) 15%, transparent 20%) 8px 9px;
   background-color:#276678;
   background-size:16px 16px;
-  color: #d3e0ea; 
+  color: #d3e0ea;
+  transition: 0.3s ease-in-out;
 }
-
 .current {
   align-self: center;
   justify-self:right;
@@ -197,13 +196,28 @@ button {
   font-size: 0.8em;
   background-color: #d3e0ea;
   border: 1px solid rgba(246, 245, 245, 0.5);
-  
+  transition: 0.3s ease-in-out;
+}
+button.darkMode{
+  background-color: #393e46;
+  color: #d3e0ea !important;
+  border: 1px solid #222831 !important;
 }
 .operator {
   background-color: #1687a7;
+  transition: 0.3s ease-in-out;
+}
+.operator.darkMode {
+  background-color: #222831;
+  color: #d3e0ea !important;
 }
 .operator2 {
   background-color: #f6f5f5;
+  transition: 0.3s ease-in-out;
+}
+.operator2.darkMode {
+  background-color: #222831;
+  color: #d3e0ea!important;  
 }
 /* toggle */
 .checkbox {
@@ -225,22 +239,22 @@ button {
 	width: 3vw;
 	transform: scale(1.5);
 }
-
 .label .ball {
 	background-color: #f6f5f5;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 	border-radius: 50%;
-	/* position: absolute; */
 	top: 2px;
 	left: 2px;
 	height: 1vw;
 	width: 1vw;
 	transform: translateX(0px);
-	transition: transform 0.2s linear;
+  transition: 0.3s ease-in-out;
 }
 .checkbox:checked + .label .ball {
 	transform: translateX(24px);
 }
-
+.ball.darkMode {
+  background-color: #d3e0ea;
+}
 
 </style>
