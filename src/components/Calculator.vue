@@ -1,11 +1,6 @@
 <template>
   <div class="background" :class="{ darkMode: darkMode }">
-    <div>
-      <input type="checkbox" class="checkbox" id="chk" @click="toggle" />
-      <label class="label" for="chk">
-        <div class="ball" :class="{ darkMode: darkMode }"></div>
-      </label>
-    </div>
+    <Toggle @toggle="toggle"/>
     <div class="calculator-container">
       <div class="calculator">
         <div class="display" :class="{ darkMode: darkMode }">
@@ -72,7 +67,11 @@
 </template>
 
 <script>
+import Toggle from "./Toggle";
 export default {
+  components: {
+    Toggle,
+  },
   data() {
     return {
       currentString: "",
@@ -166,8 +165,6 @@ export default {
         )}`;
       }
       this.previous = null;
-
-      console.log("operators", this.operators.length);
     },
     toggle() {
       this.darkMode ? (this.darkMode = false) : (this.darkMode = true);
@@ -176,7 +173,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 
 /* Mobile Styles */
 .background {
